@@ -1,0 +1,12 @@
+{
+  "item.edition1.ruby": "Рубин",
+  "item.edition1.byirpah": "Быырпах",
+  "item.edition1.byirpah_empty": "Пустая бутылка Быырпаха",
+  "effect.edition1.merriment": "Весёлость",
+  "item.edition1.byirpah_aged": "Стоявший Быырпах",
+  "item.edition1.byirpah_strong": "Крепкий Быырпах",
+  "message.edition1.too_merry": "Вы уже достаточно веселы!",
+  "tooltip.edition1.fresh": "Свежий",
+  "tooltip.edition1.next_stage": "Настоится через %s",
+  "tooltip.edition1.peak": "Пик крепости"
+}

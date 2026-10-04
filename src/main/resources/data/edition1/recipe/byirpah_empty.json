@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:glass"
+  ],
+  "result": {
+    "id": "edition1:byirpah_empty",
+    "count": 4
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "edition1:byirpah_empty",
+    "minecraft:milk_bucket"
+  ],
+  "result": {
+    "id": "edition1:byirpah",
+    "count": 1
+  }
+}

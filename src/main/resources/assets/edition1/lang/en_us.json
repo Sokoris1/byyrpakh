@@ -1,0 +1,23 @@
+{
+  "itemGroup.edition1": "Example Mod Tab",
+  "block.edition1.example_block": "Example Block",
+  "item.edition1.example_item": "Example Item",
+  "item.edition1.ruby": "Рубин",
+  "item.edition1.byirpah": "Быырпах",
+  "item.edition1.byirpah_empty": "Пустая бутылка Быырпаха",
+  "effect.edition1.merriment": "Merriment",
+  "item.edition1.byirpah_aged": "Стоявший Быырпах",
+  "item.edition1.byirpah_strong": "Крепкий Быырпах",
+  "tooltip.edition1.fresh": "Fresh",
+  "tooltip.edition1.next_stage": "Will age in %s",
+  "tooltip.edition1.peak": "Peak strength",
+
+  "message.edition1.too_merry": "Вы уже достаточно веселы!",
+  "edition1.configuration.title": "edition1 Configs",
+  "edition1.configuration.section.edition1.common.toml": "edition1 Configs",
+  "edition1.configuration.section.edition1.common.toml.title": "edition1 Configs",
+  "edition1.configuration.items": "Item List",
+  "edition1.configuration.logDirtBlock": "Log Dirt Block",
+  "edition1.configuration.magicNumberIntroduction": "Magic Number Text",
+  "edition1.configuration.magicNumber": "Magic Number"
+}

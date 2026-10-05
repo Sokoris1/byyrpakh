@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:milk_bucket",
+    "edition1:starter",
+    "edition1:starter"
+  ],
+  "result": {
+    "id": "edition1:milk_starter",
+    "count": 4
+  }
+}

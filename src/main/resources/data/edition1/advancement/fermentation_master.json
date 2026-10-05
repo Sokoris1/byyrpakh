@@ -1,0 +1,35 @@
+{
+  "parent": "edition1:root",
+  "display": {
+    "icon": {
+      "id": "edition1:byirpah_strong"
+    },
+    "title": {
+      "translate": "advancement.edition1.fermentation_master.title"
+    },
+    "description": {
+      "translate": "advancement.edition1.fermentation_master.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "have_strong_byirpah": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["edition1:byirpah_strong"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "have_strong_byirpah"
+    ]
+  ]
+}

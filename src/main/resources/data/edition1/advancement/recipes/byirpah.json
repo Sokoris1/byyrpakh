@@ -1,0 +1,32 @@
+{
+  "parent": "edition1:recipes/root",
+  "criteria": {
+    "has_milk": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["minecraft:milk_bucket"]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "edition1:byirpah"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_milk",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "edition1:byirpah"
+    ]
+  }
+}

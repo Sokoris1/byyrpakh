@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "id": "edition1:byirpah_strong"
+    },
+    "title": {
+      "translate": "advancement.edition1.root.title"
+    },
+    "description": {
+      "translate": "advancement.edition1.root.description"
+    },
+    "background": "edition1:block/ferment_background",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_byirpah": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["edition1:byirpah"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_byirpah"
+    ]
+  ]
+}

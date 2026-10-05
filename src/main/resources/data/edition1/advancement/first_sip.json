@@ -1,0 +1,33 @@
+{
+  "parent": "edition1:root",
+  "display": {
+    "icon": {
+      "id": "edition1:byirpah"
+    },
+    "title": {
+      "translate": "advancement.edition1.first_sip.title"
+    },
+    "description": {
+      "translate": "advancement.edition1.first_sip.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "drink_byirpah": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": ["edition1:byirpah"]
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "drink_byirpah"
+    ]
+  ]
+}

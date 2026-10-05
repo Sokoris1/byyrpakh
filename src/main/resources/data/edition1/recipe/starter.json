@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+      "minecraft:wheat",
+      "minecraft:wheat",
+      "minecraft:water_bucket"
+  ],
+  "result": {
+    "id": "edition1:starter",
+    "count": 2
+  }
+}

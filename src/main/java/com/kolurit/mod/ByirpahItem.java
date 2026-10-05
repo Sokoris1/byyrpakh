@@ -20,6 +20,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.Nullable;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 
 import java.util.function.Consumer;
 
@@ -109,6 +111,8 @@ public class ByirpahItem extends Item {
             for (int i = 0; i < inv.getContainerSize(); i++) {
                 if (inv.getItem(i) == stack) {                 // тот же экземпляр = наш слот
                     inv.setItem(i, transformed);
+                    level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                            SoundEvents.BREWING_STAND_BREW, SoundSource.PLAYERS, 1.0F, 1.0F);
                     break;
                 }
             }

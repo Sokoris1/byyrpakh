@@ -1,5 +1,4 @@
 {
-  "item.edition1.ruby": "Рубин",
   "item.edition1.byirpah": "Быырпах",
   "item.edition1.byirpah_empty": "Пустая бутылка Быырпаха",
   "effect.edition1.merriment": "Весёлость",
@@ -8,5 +7,12 @@
   "message.edition1.too_merry": "Вы уже достаточно веселы!",
   "tooltip.edition1.fresh": "Свежий",
   "tooltip.edition1.next_stage": "Настоится через %s",
-  "tooltip.edition1.peak": "Пик крепости"
+  "tooltip.edition1.peak": "Пик крепости",
+  "creativetab.edition1.byirpah_tab": "Быырпах",
+  "advancement.edition1.root.title": "Быырпах",
+  "advancement.edition1.root.description": "Откройте мир ферментации",
+  "advancement.edition1.first_sip.title": "Первый глоток",
+  "advancement.edition1.first_sip.description": "Выпейте свежий быырпах",
+  "advancement.edition1.fermentation_master.title": "Мастер брожения",
+  "advancement.edition1.fermentation_master.description": "Получите крепкий быырпах через ферментацию"
 }

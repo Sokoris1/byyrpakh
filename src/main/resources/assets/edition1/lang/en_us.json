@@ -1,8 +1,4 @@
 {
-  "itemGroup.edition1": "Example Mod Tab",
-  "block.edition1.example_block": "Example Block",
-  "item.edition1.example_item": "Example Item",
-  "item.edition1.ruby": "Рубин",
   "item.edition1.byirpah": "Быырпах",
   "item.edition1.byirpah_empty": "Пустая бутылка Быырпаха",
   "effect.edition1.merriment": "Merriment",
@@ -11,6 +7,7 @@
   "tooltip.edition1.fresh": "Fresh",
   "tooltip.edition1.next_stage": "Will age in %s",
   "tooltip.edition1.peak": "Peak strength",
+  "creativetab.edition1.byirpah_tab": "Byirpakh",
 
   "message.edition1.too_merry": "Вы уже достаточно веселы!",
   "edition1.configuration.title": "edition1 Configs",
@@ -19,5 +16,11 @@
   "edition1.configuration.items": "Item List",
   "edition1.configuration.logDirtBlock": "Log Dirt Block",
   "edition1.configuration.magicNumberIntroduction": "Magic Number Text",
-  "edition1.configuration.magicNumber": "Magic Number"
+  "edition1.configuration.magicNumber": "Magic Number",
+  "advancement.edition1.root.title": "Byirpakh",
+  "advancement.edition1.root.description": "Discover the world of fermentation",
+  "advancement.edition1.first_sip.title": "First Sip",
+  "advancement.edition1.first_sip.description": "Drink fresh byirpakh",
+  "advancement.edition1.fermentation_master.title": "Fermentation Master",
+  "advancement.edition1.fermentation_master.description": "Obtain strong byirpakh through fermentation"
 }

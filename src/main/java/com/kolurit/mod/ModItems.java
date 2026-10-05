@@ -8,16 +8,18 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.Component;
+
+import java.util.function.Supplier;
 
 public class ModItems {
-
     // Реестр предметов нашего мода
     public static final DeferredRegister.Items ITEMS =
             DeferredRegister.createItems(edition1.MODID);
 
-    // Сам предмет
-    public static final DeferredItem<Item> RUBY =
-            ITEMS.registerSimpleItem("ruby");
     public static final DeferredItem<Item> BYIRPAH_EMPTY =
             ITEMS.registerSimpleItem("byirpah_empty");
     // 1) пустая бутылка (уже есть выше)
@@ -53,4 +55,19 @@ public class ModItems {
             case STRONG -> BYIRPAH_STRONG.get();
         };
     }
+
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, edition1.MODID);
+
+    public static final Supplier<CreativeModeTab> BYIRPAH_TAB = CREATIVE_MODE_TABS.register("byirpah_tab",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable("creativetab.edition1.byirpah_tab"))
+                    .icon(() -> new ItemStack(BYIRPAH_STRONG.get()))
+                    .displayItems((params, output) -> {
+                        output.accept(BYIRPAH_EMPTY.get());
+                        output.accept(BYIRPAH.get());
+                        output.accept(BYIRPAH_AGED.get());
+                        output.accept(BYIRPAH_STRONG.get());
+                    })
+                    .build());
 }

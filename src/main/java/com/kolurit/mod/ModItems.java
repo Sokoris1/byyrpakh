@@ -32,7 +32,9 @@ public class ModItems {
 
     public static final DeferredItem<Item> BYIRPAH_STRONG = ITEMS.registerItem("byirpah_strong",
             props -> new ByirpahItem(drinkProps(props), ByirpahStage.STRONG));
-
+    // Закваска — полуфабрикат для крафта быырпаха
+    public static final DeferredItem<Item> STARTER = ITEMS.registerItem("starter",
+            props -> new Item(props.stacksTo(16)));
     // Общие свойства напитков — в одном месте, чтобы не дублировать
     private static Item.Properties drinkProps(Item.Properties props) {
         return props.stacksTo(16)
@@ -65,6 +67,7 @@ public class ModItems {
                     .icon(() -> new ItemStack(BYIRPAH_STRONG.get()))
                     .displayItems((params, output) -> {
                         output.accept(BYIRPAH_EMPTY.get());
+                        output.accept(STARTER.get());
                         output.accept(BYIRPAH.get());
                         output.accept(BYIRPAH_AGED.get());
                         output.accept(BYIRPAH_STRONG.get());

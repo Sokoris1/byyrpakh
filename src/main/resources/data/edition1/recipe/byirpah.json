@@ -2,7 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     "edition1:byirpah_empty",
-    "minecraft:milk_bucket"
+    "edition1:milk_starter",
+    "minecraft:sugar"
   ],
   "result": {
     "id": "edition1:byirpah",

@@ -1,12 +1,12 @@
 {
-  "parent": "edition1:recipes/root",
+  "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_milk": {
+    "has_sugar": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["minecraft:milk_bucket"]
+            "items": ["minecraft:sugar"]
           }
         ]
       }
@@ -20,7 +20,7 @@
   },
   "requirements": [
     [
-      "has_milk",
+      "has_sugar",
       "has_the_recipe"
     ]
   ],

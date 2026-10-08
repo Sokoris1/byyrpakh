@@ -24,16 +24,16 @@ public class ByirpahBottleBlock extends Block {
     // Сколько бутылок стоит на блоке: 1..3
     public static final IntegerProperty BOTTLES = IntegerProperty.create("bottles", 1, MAX_BOTTLES);
 
-    // Форма бутылки: тело 4×8×4 + горлышко 2×3×2 (хитбокс — по габаритам, 4×11×4)
+    // Форма бутылки: тело 4×9.5×4, плечики, горлышко и крышка (хитбокс — по габаритам, 4×12.5×4)
     // Раскладка совпадает с моделями byirpah_bottle_template_1/2/3
-    private static final VoxelShape ONE = Block.box(6.0, 0.0, 6.0, 10.0, 11.0, 10.0);
+    private static final VoxelShape ONE = Block.box(6.0, 0.0, 6.0, 10.0, 12.5, 10.0);
     private static final VoxelShape TWO = Shapes.or(
-            Block.box(3.0, 0.0, 6.0, 7.0, 11.0, 10.0),
-            Block.box(9.0, 0.0, 6.0, 13.0, 11.0, 10.0));
+            Block.box(3.0, 0.0, 6.0, 7.0, 12.5, 10.0),
+            Block.box(9.0, 0.0, 6.0, 13.0, 12.5, 10.0));
     private static final VoxelShape THREE = Shapes.or(
-            Block.box(3.0, 0.0, 3.0, 7.0, 11.0, 7.0),
-            Block.box(9.0, 0.0, 3.0, 13.0, 11.0, 7.0),
-            Block.box(6.0, 0.0, 9.0, 10.0, 11.0, 13.0));
+            Block.box(3.0, 0.0, 3.0, 7.0, 12.5, 7.0),
+            Block.box(9.0, 0.0, 3.0, 13.0, 12.5, 7.0),
+            Block.box(6.0, 0.0, 9.0, 10.0, 12.5, 13.0));
 
     private final ByirpahStage stage;
 

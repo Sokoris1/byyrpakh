@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/block",
+  "texture_size": [32, 32],
   "textures": {
     "particle": "#bottle"
   },
@@ -7,27 +8,49 @@
     {
       "comment": "Бутылка 1: тело",
       "from": [6, 0, 6],
-      "to": [10, 8, 10],
+      "to": [10, 9.5, 10],
       "faces": {
-        "north": {"uv": [6, 8, 10, 16], "texture": "#bottle"},
-        "south": {"uv": [6, 8, 10, 16], "texture": "#bottle"},
-        "east": {"uv": [6, 8, 10, 16], "texture": "#bottle"},
-        "west": {"uv": [6, 8, 10, 16], "texture": "#bottle"},
-        "up": {"uv": [6, 0, 10, 4], "texture": "#bottle"},
-        "down": {"uv": [6, 0, 10, 4], "texture": "#bottle", "cullface": "down"}
+        "north": {"uv": [0, 0, 4, 9.5], "texture": "#bottle"},
+        "west": {"uv": [4, 0, 8, 9.5], "texture": "#bottle"},
+        "south": {"uv": [8, 0, 12, 9.5], "texture": "#bottle"},
+        "east": {"uv": [12, 0, 16, 9.5], "texture": "#bottle"},
+        "up": {"uv": [0, 9.5, 4, 13.5], "texture": "#bottle"},
+        "down": {"uv": [4, 9.5, 8, 13.5], "texture": "#bottle", "cullface": "down"}
+      }
+    },
+    {
+      "comment": "Бутылка 1: плечики",
+      "from": [6.5, 9.5, 6.5],
+      "to": [9.5, 10.5, 9.5],
+      "faces": {
+        "north": {"uv": [0, 13.5, 3, 14.5], "texture": "#bottle"},
+        "west": {"uv": [3, 13.5, 6, 14.5], "texture": "#bottle"},
+        "south": {"uv": [6, 13.5, 9, 14.5], "texture": "#bottle"},
+        "east": {"uv": [9, 13.5, 12, 14.5], "texture": "#bottle"},
+        "up": {"uv": [8, 9.5, 11, 12.5], "texture": "#bottle"}
       }
     },
     {
       "comment": "Бутылка 1: горлышко",
-      "from": [7, 8, 7],
-      "to": [9, 11, 9],
+      "from": [7, 10.5, 7],
+      "to": [9, 11.5, 9],
       "faces": {
-        "north": {"uv": [7, 4, 9, 7], "texture": "#bottle"},
-        "south": {"uv": [7, 4, 9, 7], "texture": "#bottle"},
-        "east": {"uv": [7, 4, 9, 7], "texture": "#bottle"},
-        "west": {"uv": [7, 4, 9, 7], "texture": "#bottle"},
-        "up": {"uv": [7, 0, 9, 2], "texture": "#bottle"},
-        "down": {"uv": [7, 0, 9, 2], "texture": "#bottle"}
+        "north": {"uv": [0, 14.5, 2, 15.5], "texture": "#bottle"},
+        "west": {"uv": [2, 14.5, 4, 15.5], "texture": "#bottle"},
+        "south": {"uv": [4, 14.5, 6, 15.5], "texture": "#bottle"},
+        "east": {"uv": [6, 14.5, 8, 15.5], "texture": "#bottle"}
+      }
+    },
+    {
+      "comment": "Бутылка 1: крышка",
+      "from": [7, 11.5, 7],
+      "to": [9, 12.5, 9],
+      "faces": {
+        "north": {"uv": [8, 14.5, 10, 15.5], "texture": "#bottle"},
+        "west": {"uv": [10, 14.5, 12, 15.5], "texture": "#bottle"},
+        "south": {"uv": [12, 14.5, 14, 15.5], "texture": "#bottle"},
+        "east": {"uv": [14, 14.5, 16, 15.5], "texture": "#bottle"},
+        "up": {"uv": [11, 9.5, 13, 11.5], "texture": "#bottle"}
       }
     }
   ]

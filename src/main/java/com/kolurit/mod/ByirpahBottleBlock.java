@@ -1,6 +1,8 @@
 package com.kolurit.mod;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -9,7 +11,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -18,11 +23,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ByirpahBottleBlock extends Block implements EntityBlock {
     public static final int MAX_BOTTLES = 3;
@@ -64,6 +74,39 @@ public class ByirpahBottleBlock extends Block implements EntityBlock {
             case 3 -> THREE;
             default -> ONE;
         };
+    }
+
+    // Бутылкам нужна опора снизу (как свечам)
+    @Override
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return Block.canSupportCenter(level, pos.below(), Direction.UP);
+    }
+
+    // Убрали блок снизу — бутылки разбиваются; дроп отдаёт getDrops
+    @Override
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess,
+                                     BlockPos pos, Direction direction, BlockPos neighborPos,
+                                     BlockState neighborState, RandomSource random) {
+        if (direction == Direction.DOWN && !state.canSurvive(level, pos)) {
+            return Blocks.AIR.defaultBlockState();
+        }
+        return super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random);
+    }
+
+    // Дроп при любом разрушении (игрок не в креативе, взрыв, пропавшая опора, поршень):
+    // каждая бутылка — со своей меткой ферментации и в своей стадии
+    @Override
+    protected List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+        long gameTime = params.getLevel().getGameTime();
+        List<Long> starts = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY) instanceof ByirpahBottleBlockEntity be
+                ? be.starts() : List.of();
+        List<ItemStack> drops = new ArrayList<>();
+        for (int i = 0; i < state.getValue(BOTTLES); i++) {
+            drops.add(i < starts.size()
+                    ? ByirpahItem.bottle(stage, starts.get(i), gameTime)
+                    : new ItemStack(ModItems.byirpahFor(stage)));   // блок старой версии — без меток
+        }
+        return drops;
     }
 
     // Можно ли поставить сюда ещё одну бутылку этой стадии

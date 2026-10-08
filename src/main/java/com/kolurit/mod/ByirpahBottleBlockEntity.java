@@ -25,6 +25,10 @@ public class ByirpahBottleBlockEntity extends BlockEntity {
         super(ModBlockEntities.BYIRPAH_BOTTLES.get(), pos, state);
     }
 
+    public List<Long> starts() {
+        return List.copyOf(starts);
+    }
+
     public void push(long start) {
         starts.add(start);
         setChanged();

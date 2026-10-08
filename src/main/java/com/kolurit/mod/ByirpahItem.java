@@ -234,11 +234,12 @@ public class ByirpahItem extends Item {
                 return InteractionResult.SUCCESS;
             }
 
-            // Проверяем, что целевая позиция — воздух (можно ставить)
+            // Ставим только в воздух и только на опору (не на бок стены, не в пустоту)
             BlockState targetState = level.getBlockState(targetPos);
-            if (targetState.isAir()) {
+            BlockState bottleState = ModBlocks.byirpahBottleFor(stage).defaultBlockState();
+            if (targetState.isAir() && bottleState.canSurvive(level, targetPos)) {
                 // Ставим декоративную бутылку
-                level.setBlock(targetPos, ModBlocks.byirpahBottleFor(stage).defaultBlockState(), 3);
+                level.setBlock(targetPos, bottleState, 3);
                 // Метка бутылки переезжает в блок — ферментация продолжается
                 if (!level.isClientSide() && level.getBlockEntity(targetPos) instanceof ByirpahBottleBlockEntity be) {
                     be.push(fermentStart(context.getItemInHand(), level));

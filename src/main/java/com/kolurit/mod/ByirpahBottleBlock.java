@@ -10,6 +10,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -18,8 +22,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jspecify.annotations.Nullable;
 
-public class ByirpahBottleBlock extends Block {
+public class ByirpahBottleBlock extends Block implements EntityBlock {
     public static final int MAX_BOTTLES = 3;
     // Сколько бутылок стоит на блоке: 1..3
     public static final IntegerProperty BOTTLES = IntegerProperty.create("bottles", 1, MAX_BOTTLES);
@@ -66,9 +71,12 @@ public class ByirpahBottleBlock extends Block {
         return itemStage == stage && state.getValue(BOTTLES) < MAX_BOTTLES;
     }
 
-    // Добавляет бутылку к уже стоящим (стак уменьшает вызывающий)
-    public void addBottle(BlockState state, Level level, BlockPos pos, Player player) {
+    // Добавляет бутылку к уже стоящим (стак уменьшает вызывающий); только на сервере
+    public void addBottle(BlockState state, Level level, BlockPos pos, Player player, long fermentStart) {
         level.setBlock(pos, state.setValue(BOTTLES, state.getValue(BOTTLES) + 1), Block.UPDATE_ALL);
+        if (level.getBlockEntity(pos) instanceof ByirpahBottleBlockEntity be) {
+            be.push(fermentStart);
+        }
         level.playSound(null, pos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
         level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
     }
@@ -81,7 +89,7 @@ public class ByirpahBottleBlock extends Block {
                 return InteractionResult.PASS;                 // места нет или другая стадия — просто пьём
             }
             if (!level.isClientSide()) {
-                addBottle(state, level, pos, player);
+                addBottle(state, level, pos, player, ByirpahItem.fermentStart(stack, level));
                 stack.consume(1, player);
             }
             return InteractionResult.SUCCESS;
@@ -94,8 +102,16 @@ public class ByirpahBottleBlock extends Block {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!level.isClientSide()) {
-            ItemStack bottle = new ItemStack(ModItems.byirpahFor(stage));
+            // Бутылка уходит со своей меткой и сразу нужной стадии (могла дозреть раньше блока)
+            ByirpahBottleBlockEntity be = level.getBlockEntity(pos) instanceof ByirpahBottleBlockEntity found ? found : null;
+            Long start = be != null ? be.pop() : null;
+            ItemStack bottle = start != null
+                    ? ByirpahItem.bottle(stage, start, level.getGameTime())
+                    : new ItemStack(ModItems.byirpahFor(stage));
             if (!player.addItem(bottle)) {
+                if (be != null) {
+                    be.unpop(start);
+                }
                 return InteractionResult.PASS;                 // инвентарь полон
             }
             int bottles = state.getValue(BOTTLES);
@@ -108,5 +124,19 @@ public class ByirpahBottleBlock extends Block {
             level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
         }
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ByirpahBottleBlockEntity(pos, state);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        if (level.isClientSide() || type != ModBlockEntities.BYIRPAH_BOTTLES.get()) {
+            return null;
+        }
+        return (BlockEntityTicker<T>) (BlockEntityTicker<ByirpahBottleBlockEntity>) ByirpahBottleBlockEntity::serverTick;
     }
 }

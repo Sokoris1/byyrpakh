@@ -13,6 +13,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -101,16 +102,10 @@ public class ByirpahItem extends Item {
             return;
         }
 
-        long stageTicks = Config.FERMENT_SECONDS.get() * 20L;  // порог стадии в тиках
-        long age = level.getGameTime() - start;
-        ByirpahStage target = stage.targetFor(age, stageTicks);
-        if (target == stage) {
+        ItemStack transformed = aged(stack, level.getGameTime());
+        if (transformed == null) {
             return;                                            // ещё не настоялось
         }
-
-        // Подмена стака: количество и метку сохраняем
-        ItemStack transformed = new ItemStack(ModItems.byirpahFor(target), stack.getCount());
-        transformed.set(ModComponents.FERMENT_START.get(), start);
 
         if (entity instanceof Player player) {
             Inventory inv = player.getInventory();
@@ -123,6 +118,53 @@ public class ByirpahItem extends Item {
                 }
             }
         }
+    }
+
+    // Порог одной стадии в тиках
+    public static long stageTicks() {
+        return Config.FERMENT_SECONDS.get() * 20L;
+    }
+
+    // Метка ферментации стака или текущее время, если метки ещё нет
+    public static long fermentStart(ItemStack stack, Level level) {
+        Long start = stack.get(ModComponents.FERMENT_START.get());
+        return start != null ? start : level.getGameTime();
+    }
+
+    // Бутылка нужной стадии с заданной меткой ферментации
+    public static ItemStack bottle(ByirpahStage stage, long start, long gameTime) {
+        ItemStack stack = new ItemStack(ModItems.byirpahFor(stage));
+        stack.set(ModComponents.FERMENT_START.get(), start);
+        ItemStack transformed = aged(stack, gameTime);
+        return transformed != null ? transformed : stack;
+    }
+
+    // Если стак уже настоялся до следующей стадии — новый стак этой стадии
+    // (количество, метка и прочие компоненты сохраняются), иначе null.
+    // Ферментация идёт по метке времени, поэтому где лежала бутылка — неважно:
+    // подменить её можно в любой момент, когда до неё дотянулись.
+    public static @Nullable ItemStack aged(ItemStack stack, long gameTime) {
+        if (!(stack.getItem() instanceof ByirpahItem item)) {
+            return null;
+        }
+        Long start = stack.get(ModComponents.FERMENT_START.get());
+        if (start == null) {
+            return null;
+        }
+        ByirpahStage target = item.stage.targetFor(gameTime - start, stageTicks());
+        return target == item.stage ? null : stack.transmuteCopy(ModItems.byirpahFor(target));
+    }
+
+    // Выброшенная бутылка тоже дозревает (раз в секунду)
+    @Override
+    public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
+        if (entity.level() instanceof ServerLevel level && level.getGameTime() % 20 == 0) {
+            ItemStack transformed = aged(stack, level.getGameTime());
+            if (transformed != null) {
+                entity.setItem(transformed);
+            }
+        }
+        return false;                                          // обычное поведение предмета дальше
     }
 
     @Override
@@ -142,7 +184,7 @@ public class ByirpahItem extends Item {
 
         long now = level.getGameTime();
         long age = now - start;
-        long stageTicks = Config.FERMENT_SECONDS.get() * 20L;
+        long stageTicks = stageTicks();
 
         switch (stage) {
             case FRESH -> {
@@ -185,7 +227,8 @@ public class ByirpahItem extends Item {
             if (clickedState.getBlock() instanceof ByirpahBottleBlock bottleBlock
                     && bottleBlock.canAddBottle(clickedState, stage)) {
                 if (!level.isClientSide()) {
-                    bottleBlock.addBottle(clickedState, level, clickedPos, player);
+                    bottleBlock.addBottle(clickedState, level, clickedPos, player,
+                            fermentStart(context.getItemInHand(), level));
                     context.getItemInHand().consume(1, player);
                 }
                 return InteractionResult.SUCCESS;
@@ -196,6 +239,10 @@ public class ByirpahItem extends Item {
             if (targetState.isAir()) {
                 // Ставим декоративную бутылку
                 level.setBlock(targetPos, ModBlocks.byirpahBottleFor(stage).defaultBlockState(), 3);
+                // Метка бутылки переезжает в блок — ферментация продолжается
+                if (!level.isClientSide() && level.getBlockEntity(targetPos) instanceof ByirpahBottleBlockEntity be) {
+                    be.push(fermentStart(context.getItemInHand(), level));
+                }
                 level.gameEvent(player, net.minecraft.world.level.gameevent.GameEvent.BLOCK_PLACE, targetPos);
 
                 // Уменьшаем стак, если игрок не в креативе

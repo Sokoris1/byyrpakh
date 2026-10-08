@@ -1,3 +1,6 @@
 {
-  "parent": "edition1:block/byirpah_bottle"
+  "model": {
+    "type": "minecraft:model",
+    "model": "edition1:item/byirpah_bottle"
+  }
 }

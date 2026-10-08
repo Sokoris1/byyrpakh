@@ -1,6 +1,8 @@
 package com.kolurit.mod;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -18,7 +20,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import org.jspecify.annotations.Nullable;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -162,5 +168,33 @@ public class ByirpahItem extends Item {
         long minutes = totalSeconds / 60;
         long seconds = totalSeconds % 60;
         return String.format("%d:%02d", minutes, seconds);
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        Player player = context.getPlayer();
+        // Ставим блок только если игрок зажал Shift (присел)
+        if (player != null && player.isCrouching()) {
+            BlockPos clickedPos = context.getClickedPos();
+            Direction face = context.getClickedFace();
+            BlockPos targetPos = clickedPos.relative(face);
+            Level level = context.getLevel();
+
+            // Проверяем, что целевая позиция — воздух (можно ставить)
+            BlockState targetState = level.getBlockState(targetPos);
+            if (targetState.isAir()) {
+                // Ставим декоративную бутылку
+                level.setBlock(targetPos, ModBlocks.byirpahBottleFor(stage).defaultBlockState(), 3);
+                level.gameEvent(player, net.minecraft.world.level.gameevent.GameEvent.BLOCK_PLACE, targetPos);
+
+                // Уменьшаем стак, если игрок не в креативе
+                if (!player.isCreative()) {
+                    context.getItemInHand().shrink(1);
+                }
+                return InteractionResult.SUCCESS;
+            }
+        }
+        // Если Shift не зажат или позиция занята, возвращаем PASS, чтобы сработала логика питья
+        return InteractionResult.PASS;
     }
 }

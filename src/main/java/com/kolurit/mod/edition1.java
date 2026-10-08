@@ -27,6 +27,7 @@ public class edition1 {
         ModItems.CREATIVE_MODE_TABS.register(modEventBus);
         ModEffects.MOB_EFFECTS.register(modEventBus);
         ModComponents.COMPONENTS.register(modEventBus);
+        ModBlocks.BLOCKS.register(modEventBus);
 
 
         // Register ourselves for server and other game events we are interested in.

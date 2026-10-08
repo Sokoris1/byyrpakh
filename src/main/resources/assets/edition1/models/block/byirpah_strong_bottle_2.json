@@ -1,5 +1,5 @@
 {
-  "parent": "edition1:block/byirpah_bottle_template_1",
+  "parent": "edition1:block/byirpah_bottle_template_2",
   "textures": {
     "bottle": "edition1:block/byirpah_strong_bottle"
   }

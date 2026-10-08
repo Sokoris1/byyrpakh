@@ -1,7 +1,13 @@
 {
   "variants": {
-    "": {
+    "bottles=1": {
       "model": "edition1:block/byirpah_aged_bottle"
+    },
+    "bottles=2": {
+      "model": "edition1:block/byirpah_aged_bottle_2"
+    },
+    "bottles=3": {
+      "model": "edition1:block/byirpah_aged_bottle_3"
     }
   }
 }

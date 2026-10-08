@@ -180,6 +180,17 @@ public class ByirpahItem extends Item {
             BlockPos targetPos = clickedPos.relative(face);
             Level level = context.getLevel();
 
+            // Кликнули по уже стоящим бутылкам той же стадии — доставляем ещё одну (до трёх)
+            BlockState clickedState = level.getBlockState(clickedPos);
+            if (clickedState.getBlock() instanceof ByirpahBottleBlock bottleBlock
+                    && bottleBlock.canAddBottle(clickedState, stage)) {
+                if (!level.isClientSide()) {
+                    bottleBlock.addBottle(clickedState, level, clickedPos, player);
+                    context.getItemInHand().consume(1, player);
+                }
+                return InteractionResult.SUCCESS;
+            }
+
             // Проверяем, что целевая позиция — воздух (можно ставить)
             BlockState targetState = level.getBlockState(targetPos);
             if (targetState.isAir()) {

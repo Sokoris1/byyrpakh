@@ -12,5 +12,6 @@
 
 ## Установка
 1. Установите NeoForge 26.1.2.114
-2. Скачайте [последний релиз](https://github.com/Sokoris1/byyrpakh/releases)
-3. Положите jar в папку mods/
+2. Начиная с версии 1.3.0 нужен [TerraBlender](https://github.com/Glitchfiend/TerraBlender) для 26.1.2 — положите его в папку mods/
+3. Скачайте [последний релиз](https://github.com/Sokoris1/byyrpakh/releases)
+4. Положите jar в папку mods/

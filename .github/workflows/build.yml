@@ -26,12 +26,6 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x ./gradlew
 
-      - name: Probe TerraBlender versions (temporary)
-        run: |
-          for u in https://maven.minecraftforge.net/releases/com/github/glitchfiend/TerraBlender-neoforge/maven-metadata.xml https://maven.minecraftforge.net/com/github/glitchfiend/TerraBlender-neoforge/maven-metadata.xml; do
-            echo "== $u"; curl -sS "$u" | grep -o '<version>26[^<]*\|<latest>[^<]*\|<release>[^<]*' || true
-          done
-
       - name: Build with Gradle
         run: ./gradlew build
 

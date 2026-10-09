@@ -3,9 +3,7 @@
     "minecraft:visual/sky_color": "#78a7ff"
   },
   "carvers": [
-    "minecraft:cave",
-    "minecraft:cave_extra_underground",
-    "minecraft:canyon"
+    "minecraft:cave_extra_underground"
   ],
   "downfall": 0.6,
   "effects": {
@@ -16,8 +14,7 @@
   "features": [
     [],
     [
-      "minecraft:lake_lava_underground",
-      "minecraft:lake_lava_surface"
+      "minecraft:lake_lava_underground"
     ],
     [
       "minecraft:amethyst_geode"

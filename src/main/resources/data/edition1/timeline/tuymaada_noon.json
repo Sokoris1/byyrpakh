@@ -1,0 +1,235 @@
+{
+  "clock": "minecraft:overworld",
+  "period_ticks": 24000,
+  "tracks": {
+    "minecraft:audio/firefly_bush_sounds": {
+      "modifier": "or",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": false
+        },
+        {
+          "ticks": 12000,
+          "value": false
+        }
+      ]
+    },
+    "minecraft:gameplay/bees_stay_in_hive": {
+      "modifier": "or",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": false
+        },
+        {
+          "ticks": 12000,
+          "value": false
+        }
+      ]
+    },
+    "minecraft:gameplay/cat_waking_up_gift_chance": {
+      "modifier": "maximum",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": 0.0
+        },
+        {
+          "ticks": 12000,
+          "value": 0.0
+        }
+      ]
+    },
+    "minecraft:gameplay/creaking_active": {
+      "modifier": "or",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": false
+        },
+        {
+          "ticks": 12000,
+          "value": false
+        }
+      ]
+    },
+    "minecraft:gameplay/eyeblossom_open": {
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": false
+        },
+        {
+          "ticks": 12000,
+          "value": false
+        }
+      ]
+    },
+    "minecraft:gameplay/monsters_burn": {
+      "modifier": "or",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": true
+        },
+        {
+          "ticks": 12000,
+          "value": true
+        }
+      ]
+    },
+    "minecraft:gameplay/sky_light_level": {
+      "modifier": "multiply",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": 1.0
+        },
+        {
+          "ticks": 12000,
+          "value": 1.0
+        }
+      ]
+    },
+    "minecraft:gameplay/turtle_egg_hatch_chance": {
+      "modifier": "maximum",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": 0.002
+        },
+        {
+          "ticks": 12000,
+          "value": 0.002
+        }
+      ]
+    },
+    "minecraft:visual/cloud_color": {
+      "modifier": "multiply",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": -1
+        },
+        {
+          "ticks": 12000,
+          "value": -1
+        }
+      ]
+    },
+    "minecraft:visual/fog_color": {
+      "modifier": "multiply",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": "#ffffff"
+        },
+        {
+          "ticks": 12000,
+          "value": "#ffffff"
+        }
+      ]
+    },
+    "minecraft:visual/moon_angle": {
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": 180.0
+        },
+        {
+          "ticks": 12000,
+          "value": 180.0
+        }
+      ]
+    },
+    "minecraft:visual/sky_color": {
+      "modifier": "multiply",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": "#ffffff"
+        },
+        {
+          "ticks": 12000,
+          "value": "#ffffff"
+        }
+      ]
+    },
+    "minecraft:visual/sky_light_color": {
+      "modifier": "multiply",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": "#ffffff"
+        },
+        {
+          "ticks": 12000,
+          "value": "#ffffff"
+        }
+      ]
+    },
+    "minecraft:visual/sky_light_factor": {
+      "modifier": "multiply",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": 1.0
+        },
+        {
+          "ticks": 12000,
+          "value": 1.0
+        }
+      ]
+    },
+    "minecraft:visual/star_angle": {
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": 0.0
+        },
+        {
+          "ticks": 12000,
+          "value": 0.0
+        }
+      ]
+    },
+    "minecraft:visual/star_brightness": {
+      "modifier": "maximum",
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": 0.0
+        },
+        {
+          "ticks": 12000,
+          "value": 0.0
+        }
+      ]
+    },
+    "minecraft:visual/sun_angle": {
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": 0.0
+        },
+        {
+          "ticks": 12000,
+          "value": 0.0
+        }
+      ]
+    },
+    "minecraft:visual/sunrise_sunset_color": {
+      "keyframes": [
+        {
+          "ticks": 0,
+          "value": "#00ffe533"
+        },
+        {
+          "ticks": 12000,
+          "value": "#00ffe533"
+        }
+      ]
+    }
+  }
+}

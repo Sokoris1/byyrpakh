@@ -12,10 +12,9 @@ import terrablender.api.RegionType;
 
 import java.util.function.Consumer;
 
-// Регион TerraBlender: копия ванильного обычного мира, где вся умеренная полоса — равнины,
-// леса, тёмный лес и тайга — заменена Долиной Туймаада. Так долина выходит сплошной и очень
-// широкой, а берёзовые рощи внутри неё заменяют собой леса. Чтобы долин при этом не стало
-// слишком много, у региона небольшой вес.
+// Регион TerraBlender: копия ванильного обычного мира, где равнины и умеренные леса
+// на той же плоской земле заменены Долиной Туймаада. Так долина выходит сплошной,
+// а берёзовые рощи внутри неё заменяют собой леса. У региона небольшой вес — долина редкая.
 public class TuymaadaRegion extends Region {
     // Вес региона: ванильный регион по умолчанию весит 10.
     // Чем меньше вес, тем реже встречаются регионы с долиной.
@@ -34,10 +33,6 @@ public class TuymaadaRegion extends Region {
             builder.replaceBiome(Biomes.FLOWER_FOREST, ModBiomes.TUYMAADA_VALLEY);
             builder.replaceBiome(Biomes.BIRCH_FOREST, ModBiomes.TUYMAADA_VALLEY);
             builder.replaceBiome(Biomes.OLD_GROWTH_BIRCH_FOREST, ModBiomes.TUYMAADA_VALLEY);
-            builder.replaceBiome(Biomes.DARK_FOREST, ModBiomes.TUYMAADA_VALLEY);
-            builder.replaceBiome(Biomes.TAIGA, ModBiomes.TUYMAADA_VALLEY);
-            builder.replaceBiome(Biomes.OLD_GROWTH_PINE_TAIGA, ModBiomes.TUYMAADA_VALLEY);
-            builder.replaceBiome(Biomes.OLD_GROWTH_SPRUCE_TAIGA, ModBiomes.TUYMAADA_VALLEY);
         });
     }
 }

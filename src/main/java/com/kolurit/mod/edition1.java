@@ -12,6 +12,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
+import terrablender.api.Regions;
 
 @Mod(edition1.MODID)
 public class edition1 {
@@ -45,8 +46,8 @@ public class edition1 {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
+        // Регистрируем регион с Долиной Туймаада в генерации обычного мира
+        event.enqueueWork(() -> Regions.register(new TuymaadaRegion()));
     }
 
     // Add the example block item to the building blocks tab

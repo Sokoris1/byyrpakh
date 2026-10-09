@@ -10,7 +10,6 @@
   "creativetab.edition1.byirpah_tab": "Byirpakh",
   "item.edition1.starter": "Starter",
   "item.edition1.milk_starter": "Milk Starter",
-
   "message.edition1.too_merry": "Вы уже достаточно веселы!",
   "edition1.configuration.title": "edition1 Configs",
   "edition1.configuration.section.edition1.common.toml": "edition1 Configs",
@@ -24,5 +23,6 @@
   "advancement.edition1.first_sip.title": "First Sip",
   "advancement.edition1.first_sip.description": "Drink fresh byirpakh",
   "advancement.edition1.fermentation_master.title": "Fermentation Master",
-  "advancement.edition1.fermentation_master.description": "Obtain strong byirpakh through fermentation"
+  "advancement.edition1.fermentation_master.description": "Obtain strong byirpakh through fermentation",
+  "biome.edition1.tuymaada_valley": "Tuymaada Valley"
 }

@@ -1,0 +1,11 @@
+{
+  "type": "edition1:tuymaada",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "edition1:tuymaada"
+    },
+    "settings": "edition1:tuymaada"
+  }
+}

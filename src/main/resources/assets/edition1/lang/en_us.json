@@ -24,5 +24,7 @@
   "advancement.edition1.first_sip.description": "Drink fresh byirpakh",
   "advancement.edition1.fermentation_master.title": "Fermentation Master",
   "advancement.edition1.fermentation_master.description": "Obtain strong byirpakh through fermentation",
-  "biome.edition1.tuymaada_valley": "Tuymaada Valley"
+  "biome.edition1.tuymaada_valley": "Tuymaada Valley",
+  "biome.edition1.tuymaada": "Tuymaada Valley",
+  "message.edition1.tuymaada_no_sleep": "You can't sleep in Tuymaada: the sun never sets here"
 }

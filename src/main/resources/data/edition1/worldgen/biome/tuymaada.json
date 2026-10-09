@@ -15,8 +15,7 @@
   "features": [
     [],
     [
-      "minecraft:lake_lava_underground",
-      "edition1:tuymaada_water_lake"
+      "minecraft:lake_lava_underground"
     ],
     [
       "minecraft:amethyst_geode"

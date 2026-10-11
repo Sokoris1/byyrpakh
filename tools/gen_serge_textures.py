@@ -4,6 +4,7 @@
 Запуск из корня репозитория:  python3 tools/gen_serge_textures.py
 Нужен Pillow:                 pip install pillow
 """
+import math
 import random
 from pathlib import Path
 
@@ -46,19 +47,30 @@ def top(lit, rnd):
     return im
 
 
-def portal_frames(rnd, frames=8):
-    """Золотистое мерцающее пятно: кадры сверху вниз, анимация через .mcmeta."""
+def portal_frames(rnd, frames=32):
+    """Портал как в Незер (алгоритм старой процедурной текстуры портала: два вихря,
+    закрученных в разные стороны), но в ярких жёлтых тонах. Кадры сверху вниз,
+    анимация через .mcmeta."""
     im = Image.new("RGBA", (16, 16 * frames))
-    sparks = [(rnd.randrange(16), rnd.randrange(16), rnd.randrange(frames)) for _ in range(18)]
     for f in range(frames):
         for y in range(16):
             for x in range(16):
-                t = (x * 3 + y * 5 + f * 4) % 16 / 16
-                r, g, b = 255, int(160 + 70 * t), int(40 + 90 * t)
+                v = 0.0
+                for i in range(2):
+                    cx = cy = i * 16 * 0.5
+                    dx = (x - cx) / 16 * 2
+                    dy = (y - cy) / 16 * 2
+                    dx = dx + 2 if dx < -1 else dx - 2 if dx >= 1 else dx
+                    dy = dy + 2 if dy < -1 else dy - 2 if dy >= 1 else dy
+                    d = dx * dx + dy * dy
+                    a = math.atan2(dy, dx) + (f / frames * math.pi * 2 - d * 10 + i * 2) * (i * 2 - 1)
+                    a = (math.sin(a) + 1) / 2
+                    v += a / (d + 1) * 0.5
+                v = min(1.0, v + rnd.random() * 0.1)
+                r = int(205 + v * 50)
+                g = int(135 + v * v * 120)
+                b = int(v ** 3 * 140)
                 im.putpixel((x, f * 16 + y), (r, g, b, 255))
-        for sx, sy, sf in sparks:
-            if (f - sf) % frames < 2:
-                im.putpixel((sx, f * 16 + sy), (255, 255, 240, 255))
     return im
 
 
@@ -70,7 +82,7 @@ def main():
     top(False, rnd).save(OUT / "serge_top.png")
     top(True, rnd).save(OUT / "serge_top_lit.png")
     portal_frames(rnd).save(OUT / "tuymaada_portal.png")
-    (OUT / "tuymaada_portal.png.mcmeta").write_text('{\n  "animation": {\n    "frametime": 3\n  }\n}\n')
+    (OUT / "tuymaada_portal.png.mcmeta").write_text('{\n  "animation": {\n    "frametime": 2\n  }\n}\n')
     print("textures written to", OUT)
 
 

@@ -26,9 +26,9 @@ public class ModBlocks {
                     .sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.BLOCK)
                     .lightLevel(state -> state.getValue(SergeBlock.LIT) ? 10 : 0)));
 
-    // Портал в Туймааду: сквозь него проходят, не ломается, ярко светится
+    // Портал в Туймааду: заполняет бассейн круга, сквозь него проходят, не ломается, ярко светится
     public static final DeferredBlock<Block> TUYMAADA_PORTAL = BLOCKS.registerBlock("tuymaada_portal",
-            props -> new TuymaadaPortalBlock(props.mapColor(MapColor.GOLD).noCollision().strength(-1.0F, 3600000.0F)
+            props -> new TuymaadaPortalBlock(props.mapColor(MapColor.GOLD).noCollision().noOcclusion().strength(-1.0F, 3600000.0F)
                     .noLootTable().sound(SoundType.GLASS).pushReaction(PushReaction.BLOCK)
                     .lightLevel(state -> 12)));
 

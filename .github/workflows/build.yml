@@ -29,6 +29,24 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+      - name: Probe Minecraft API (temporary)
+        if: always()
+        run: |
+          J=$(find ~/.gradle build -name "*.jar" -size +5M 2>/dev/null | while read j; do unzip -l "$j" 2>/dev/null | grep -q "net/minecraft/world/level/block/Portal.class" && echo "$j" && break; done)
+          echo "JAR=$J"
+          for c in net.minecraft.world.level.block.Portal net.minecraft.world.level.portal.TeleportTransition 'net.minecraft.world.level.portal.TeleportTransition$PostTeleportTransition' net.minecraft.world.level.block.EndPortalBlock net.minecraft.world.level.levelgen.feature.FeaturePlaceContext net.minecraft.world.entity.Relative; do
+            echo "=== $c"; javap -cp "$J" "$c" || true
+          done
+          echo "=== Entity portal/teleport"; javap -cp "$J" net.minecraft.world.entity.Entity | grep -i -E "portal|teleport|dimension" || true
+          echo "=== BlockBehaviour"; javap -cp "$J" net.minecraft.world.level.block.state.BlockBehaviour | grep -i -E "entityInside|updateShape|canSurvive|getShape|getDrops|useItemOn|useWithoutItem|animateTick" || true
+          echo "=== Properties"; javap -cp "$J" 'net.minecraft.world.level.block.state.BlockBehaviour$Properties' | grep -i -E "light|strength|noLoot|instabreak|pushReaction|noCollision|replaceable|mapColor" || true
+          echo "=== ItemStack"; javap -cp "$J" net.minecraft.world.item.ItemStack | grep -i -E "hurtAndBreak|isDamageable| is\(" || true
+          echo "=== Feature"; javap -cp "$J" net.minecraft.world.level.levelgen.feature.Feature | grep -i -E "place|<init>|setBlock" || true
+          echo "=== Level height"; javap -cp "$J" net.minecraft.world.level.LevelReader | grep -i -E "getHeight" || true
+          echo "=== ServerLevel"; javap -cp "$J" net.minecraft.server.level.ServerLevel | grep -i -E "sendParticles|getServer|getLevel" | head -8 || true
+          echo "=== MinecraftServer getLevel"; javap -cp "$J" net.minecraft.server.MinecraftServer | grep -i -E "getLevel|overworld" || true
+          echo "=== LivingEntity slot"; javap -cp "$J" net.minecraft.world.entity.LivingEntity | grep -i -E "getSlotForHand" || true
+
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:

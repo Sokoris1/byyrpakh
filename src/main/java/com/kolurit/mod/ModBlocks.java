@@ -3,6 +3,7 @@ package com.kolurit.mod;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -18,6 +19,18 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> BYIRPAH_STRONG_BOTTLE = BLOCKS.registerBlock("byirpah_strong_bottle",
             props -> new ByirpahBottleBlock(bottleProps(props), ByirpahStage.STRONG));
+
+    // Сэргэ: в выживании не ломается и ничего не роняет; зажжённое светится
+    public static final DeferredBlock<Block> SERGE = BLOCKS.registerBlock("serge",
+            props -> new SergeBlock(props.mapColor(MapColor.WOOD).strength(-1.0F, 3600000.0F).noLootTable()
+                    .sound(SoundType.WOOD).noOcclusion().pushReaction(PushReaction.BLOCK)
+                    .lightLevel(state -> state.getValue(SergeBlock.LIT) ? 10 : 0)));
+
+    // Портал в Туймааду: сквозь него проходят, не ломается, ярко светится
+    public static final DeferredBlock<Block> TUYMAADA_PORTAL = BLOCKS.registerBlock("tuymaada_portal",
+            props -> new TuymaadaPortalBlock(props.mapColor(MapColor.GOLD).noCollision().strength(-1.0F, 3600000.0F)
+                    .noLootTable().sound(SoundType.GLASS).pushReaction(PushReaction.BLOCK)
+                    .lightLevel(state -> 12)));
 
     // Общие свойства блоков-бутылок; поршень разбивает их с дропом
     private static BlockBehaviour.Properties bottleProps(BlockBehaviour.Properties props) {

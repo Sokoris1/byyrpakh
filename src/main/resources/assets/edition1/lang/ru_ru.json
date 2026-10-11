@@ -19,5 +19,7 @@
   "advancement.edition1.fermentation_master.description": "Получите крепкий быырпах через ферментацию",
   "biome.edition1.tuymaada_valley": "Долина Туймаада",
   "biome.edition1.tuymaada": "Долина Туймаада",
-  "message.edition1.tuymaada_no_sleep": "В Туймааде не уснуть: здесь никогда не заходит солнце"
+  "message.edition1.tuymaada_no_sleep": "В Туймааде не уснуть: здесь никогда не заходит солнце",
+  "block.edition1.serge": "Сэргэ",
+  "block.edition1.tuymaada_portal": "Портал в Туймааду"
 }

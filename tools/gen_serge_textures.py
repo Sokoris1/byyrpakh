@@ -55,7 +55,7 @@ def portal_frames(rnd, frames=8):
             for x in range(16):
                 t = (x * 3 + y * 5 + f * 4) % 16 / 16
                 r, g, b = 255, int(160 + 70 * t), int(40 + 90 * t)
-                im.putpixel((x, f * 16 + y), (r, g, b, 225))
+                im.putpixel((x, f * 16 + y), (r, g, b, 255))
         for sx, sy, sf in sparks:
             if (f - sf) % frames < 2:
                 im.putpixel((sx, f * 16 + sy), (255, 255, 240, 255))

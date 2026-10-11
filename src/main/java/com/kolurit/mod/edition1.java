@@ -30,6 +30,7 @@ public class edition1 {
         ModComponents.COMPONENTS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        ModFeatures.FEATURES.register(modEventBus);
 
 
         // Register ourselves for server and other game events we are interested in.

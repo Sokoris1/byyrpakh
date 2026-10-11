@@ -23,7 +23,9 @@
       "minecraft:monster_room",
       "minecraft:monster_room_deep"
     ],
-    [],
+    [
+      "edition1:serge_circle"
+    ],
     [],
     [
       "minecraft:ore_dirt",

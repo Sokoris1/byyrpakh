@@ -1,0 +1,7 @@
+{
+  "parent": "edition1:block/serge_base_template",
+  "textures": {
+    "side": "edition1:block/serge",
+    "top": "edition1:block/serge_top"
+  }
+}

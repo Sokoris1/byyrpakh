@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "lit=false,part=0": {
+      "model": "edition1:block/serge_base"
+    },
+    "lit=true,part=0": {
+      "model": "edition1:block/serge_base_lit"
+    },
+    "lit=false,part=1": {
+      "model": "edition1:block/serge_middle"
+    },
+    "lit=true,part=1": {
+      "model": "edition1:block/serge_middle_lit"
+    },
+    "lit=false,part=2": {
+      "model": "edition1:block/serge_top"
+    },
+    "lit=true,part=2": {
+      "model": "edition1:block/serge_top_lit"
+    }
+  }
+}

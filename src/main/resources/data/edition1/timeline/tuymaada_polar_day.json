@@ -113,7 +113,15 @@
           "value": -1
         },
         {
+          "ticks": 6000,
+          "value": -1
+        },
+        {
           "ticks": 12000,
+          "value": -9808
+        },
+        {
+          "ticks": 18000,
           "value": -1
         }
       ]
@@ -126,20 +134,36 @@
           "value": "#ffffff"
         },
         {
+          "ticks": 6000,
+          "value": "#ffffff"
+        },
+        {
           "ticks": 12000,
+          "value": "#ffcf9a"
+        },
+        {
+          "ticks": 18000,
           "value": "#ffffff"
         }
       ]
     },
     "minecraft:visual/moon_angle": {
+      "ease": {
+        "cubic_bezier": [
+          0.42,
+          0.0,
+          0.58,
+          1.0
+        ]
+      },
       "keyframes": [
         {
           "ticks": 0,
-          "value": 180.0
+          "value": 225.0
         },
         {
           "ticks": 12000,
-          "value": 180.0
+          "value": 258.0
         }
       ]
     },
@@ -151,7 +175,15 @@
           "value": "#ffffff"
         },
         {
+          "ticks": 6000,
+          "value": "#ffffff"
+        },
+        {
           "ticks": 12000,
+          "value": "#fff0e2"
+        },
+        {
+          "ticks": 18000,
           "value": "#ffffff"
         }
       ]
@@ -164,7 +196,15 @@
           "value": "#ffffff"
         },
         {
+          "ticks": 6000,
+          "value": "#ffffff"
+        },
+        {
           "ticks": 12000,
+          "value": "#ffe6c4"
+        },
+        {
+          "ticks": 18000,
           "value": "#ffffff"
         }
       ]
@@ -183,14 +223,22 @@
       ]
     },
     "minecraft:visual/star_angle": {
+      "ease": {
+        "cubic_bezier": [
+          0.42,
+          0.0,
+          0.58,
+          1.0
+        ]
+      },
       "keyframes": [
         {
           "ticks": 0,
-          "value": 0.0
+          "value": 45.0
         },
         {
           "ticks": 12000,
-          "value": 0.0
+          "value": 78.0
         }
       ]
     },
@@ -208,14 +256,22 @@
       ]
     },
     "minecraft:visual/sun_angle": {
+      "ease": {
+        "cubic_bezier": [
+          0.42,
+          0.0,
+          0.58,
+          1.0
+        ]
+      },
       "keyframes": [
         {
           "ticks": 0,
-          "value": 0.0
+          "value": 45.0
         },
         {
           "ticks": 12000,
-          "value": 0.0
+          "value": 78.0
         }
       ]
     },
@@ -226,7 +282,15 @@
           "value": "#00ffe533"
         },
         {
+          "ticks": 6000,
+          "value": "#00ffe533"
+        },
+        {
           "ticks": 12000,
+          "value": "#a8f09038"
+        },
+        {
+          "ticks": 18000,
           "value": "#00ffe533"
         }
       ]

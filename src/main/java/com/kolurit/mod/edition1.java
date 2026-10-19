@@ -46,6 +46,8 @@ public class edition1 {
         }
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
             event.accept(ModItems.SARDAANA);
+            event.accept(ModItems.GOLDEN_LARCH_LEAVES);
+            event.accept(ModItems.LARCH_SAPLING);
         }
     }
 }

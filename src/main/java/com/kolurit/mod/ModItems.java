@@ -40,6 +40,9 @@ public class ModItems {
             props -> new Item(props.stacksTo(16)));
     // Цветок сардаана
     public static final DeferredItem<BlockItem> SARDAANA = ITEMS.registerSimpleBlockItem(ModBlocks.SARDAANA);
+    // Лиственница
+    public static final DeferredItem<BlockItem> GOLDEN_LARCH_LEAVES = ITEMS.registerSimpleBlockItem(ModBlocks.GOLDEN_LARCH_LEAVES);
+    public static final DeferredItem<BlockItem> LARCH_SAPLING = ITEMS.registerSimpleBlockItem(ModBlocks.LARCH_SAPLING);
 
     // Общие свойства напитков — в одном месте, чтобы не дублировать
     private static Item.Properties drinkProps(Item.Properties props) {
@@ -79,6 +82,8 @@ public class ModItems {
                         output.accept(BYIRPAH_AGED.get());
                         output.accept(BYIRPAH_STRONG.get());
                         output.accept(SARDAANA.get());
+                        output.accept(GOLDEN_LARCH_LEAVES.get());
+                        output.accept(LARCH_SAPLING.get());
                     })
                     .build());
 }

@@ -28,5 +28,9 @@
   "edition1.configuration.fermentSeconds": "Seconds per fermentation stage",
   "edition1.configuration.sleepBonusTicks": "Aging bonus for sleeping (ticks)",
   "block.edition1.sardaana": "Sardaana",
-  "block.edition1.potted_sardaana": "Potted Sardaana"
+  "block.edition1.potted_sardaana": "Potted Sardaana",
+  "block.edition1.golden_larch_leaves": "Golden Larch Needles",
+  "block.edition1.larch_sapling": "Larch Sapling",
+  "block.edition1.potted_larch_sapling": "Potted Larch Sapling",
+  "biome.edition1.tuymaada_larch_taiga": "Golden Larch Taiga"
 }

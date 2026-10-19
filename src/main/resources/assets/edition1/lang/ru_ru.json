@@ -28,5 +28,9 @@
   "edition1.configuration.fermentSeconds": "Секунд на одну стадию ферментации",
   "edition1.configuration.sleepBonusTicks": "Бонус ферментации за сон (тики)",
   "block.edition1.sardaana": "Сардаана",
-  "block.edition1.potted_sardaana": "Сардаана в горшке"
+  "block.edition1.potted_sardaana": "Сардаана в горшке",
+  "block.edition1.golden_larch_leaves": "Золотая хвоя лиственницы",
+  "block.edition1.larch_sapling": "Саженец лиственницы",
+  "block.edition1.potted_larch_sapling": "Саженец лиственницы в горшке",
+  "biome.edition1.tuymaada_larch_taiga": "Золотая лиственничная тайга"
 }

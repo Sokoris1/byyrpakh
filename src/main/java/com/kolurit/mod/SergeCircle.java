@@ -19,8 +19,50 @@ public final class SergeCircle {
     private static final int[][] CORNERS = {{CORNER, CORNER}, {CORNER, -CORNER}, {-CORNER, CORNER}, {-CORNER, -CORNER}};
     // Насколько выше или ниже искать основания столбов и воду бассейна
     private static final int SEARCH_DY = 6;
+    // Наибольший перепад высот под столбами, при котором круг ещё ставится
+    private static final int MAX_SLOPE = 3;
+    // Шаг поиска подходящего места
+    private static final int SITE_STEP = 4;
 
     private SergeCircle() {}
+
+    // Подходит ли место под круг с центром x/z: под центром и столбами твёрдая земля, а не вода,
+    // и перепад высот между ними не больше MAX_SLOPE
+    public static boolean isGoodSite(LevelAccessor level, int x, int z) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int dx = -CORNER; dx <= CORNER; dx += CORNER) {
+            for (int dz = -CORNER; dz <= CORNER; dz += CORNER) {
+                int px = x + dx;
+                int pz = z + dz;
+                int y = surfaceY(level, px, pz);
+                if (!level.getBlockState(new BlockPos(px, y - 1, pz)).getFluidState().isEmpty()) {
+                    return false;
+                }
+                min = Math.min(min, y);
+                max = Math.max(max, y);
+            }
+        }
+        return max - min <= MAX_SLOPE;
+    }
+
+    // Ближайшее к x/z подходящее место (по расширяющимся квадратам), не дальше radius; null — не нашли
+    public static @Nullable BlockPos findSiteNear(LevelAccessor level, int x, int z, int radius) {
+        for (int r = 0; r <= radius; r += SITE_STEP) {
+            for (int dx = -r; dx <= r; dx += SITE_STEP) {
+                for (int dz = -r; dz <= r; dz += SITE_STEP) {
+                    // Только периметр квадрата: внутренние точки проверили на прошлых кругах
+                    if (Math.abs(dx) != r && Math.abs(dz) != r) {
+                        continue;
+                    }
+                    if (isGoodSite(level, x + dx, z + dz)) {
+                        return new BlockPos(x + dx, surfaceY(level, x + dx, z + dz), z + dz);
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
     // Высота первого свободного блока над землёй (трава и цветы не считаются, вода считается)
     public static int surfaceY(LevelAccessor level, int x, int z) {

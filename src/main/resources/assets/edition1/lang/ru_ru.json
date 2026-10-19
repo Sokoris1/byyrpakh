@@ -21,5 +21,10 @@
   "biome.edition1.tuymaada": "Долина Туймаада",
   "message.edition1.tuymaada_no_sleep": "В Туймааде не уснуть: здесь никогда не заходит солнце",
   "block.edition1.serge": "Сэргэ",
-  "block.edition1.tuymaada_portal": "Портал в Туймааду"
+  "block.edition1.tuymaada_portal": "Портал в Туймааду",
+  "edition1.configuration.title": "Настройки Быырпаха",
+  "edition1.configuration.section.edition1.common.toml": "Настройки Быырпаха",
+  "edition1.configuration.section.edition1.common.toml.title": "Настройки Быырпаха",
+  "edition1.configuration.fermentSeconds": "Секунд на одну стадию ферментации",
+  "edition1.configuration.sleepBonusTicks": "Бонус ферментации за сон (тики)"
 }

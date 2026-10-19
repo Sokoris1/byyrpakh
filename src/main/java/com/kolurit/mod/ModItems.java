@@ -1,4 +1,4 @@
-package com.kolurit.mod; // ваш пакет
+package com.kolurit.mod;
 
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -22,8 +22,7 @@ public class ModItems {
 
     public static final DeferredItem<Item> BYIRPAH_EMPTY =
             ITEMS.registerSimpleItem("byirpah_empty");
-    // 1) пустая бутылка (уже есть выше)
-// 2) три стадии напитка
+    // Три стадии напитка
     public static final DeferredItem<Item> BYIRPAH = ITEMS.registerItem("byirpah",
             props -> new ByirpahItem(drinkProps(props), ByirpahStage.FRESH));
 

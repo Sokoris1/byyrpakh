@@ -21,9 +21,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jspecify.annotations.Nullable;
@@ -47,7 +47,6 @@ public class ByirpahItem extends Item {
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
         if (merrimentLevel(player) >= stage.maxLevel()) {
             if (!level.isClientSide()) {
                 Component msg = Component.translatable("message.edition1.too_merry");
@@ -182,29 +181,20 @@ public class ByirpahItem extends Item {
         Level level = context.level();
         if (level == null) return;
 
-        long now = level.getGameTime();
-        long age = now - start;
+        // Считаем от стадии, до которой бутылка уже дозрела: предмет мог ещё не смениться
+        // (лежит в воронке, в руке курсора), а время до следующей стадии не должно уходить в минус
+        long age = level.getGameTime() - start;
         long stageTicks = stageTicks();
-
-        switch (stage) {
-            case FRESH -> {
-                long left = (age < stageTicks ? stageTicks : 2 * stageTicks) - age;
-                tooltipComponents.accept(Component.translatable("tooltip.edition1.next_stage", formatTime(left))
-                        .withStyle(ChatFormatting.GRAY));
-            }
-            case AGED -> {
-                if (age < 2 * stageTicks) {
-                    tooltipComponents.accept(Component.translatable("tooltip.edition1.next_stage", formatTime(2 * stageTicks - age))
-                            .withStyle(ChatFormatting.GRAY));
-                } else {
-                    tooltipComponents.accept(Component.translatable("tooltip.edition1.peak")
-                            .withStyle(ChatFormatting.YELLOW));
-                }
-            }
-            case STRONG -> tooltipComponents.accept(Component.translatable("tooltip.edition1.peak")
+        long nextAge = stage.targetFor(age, stageTicks).nextStageAge(stageTicks);
+        if (nextAge < 0) {
+            tooltipComponents.accept(Component.translatable("tooltip.edition1.peak")
                     .withStyle(ChatFormatting.YELLOW));
+        } else {
+            tooltipComponents.accept(Component.translatable("tooltip.edition1.next_stage", formatTime(nextAge - age))
+                    .withStyle(ChatFormatting.GRAY));
         }
     }
+
     private static String formatTime(long ticks) {
         long totalSeconds = ticks / 20;
         long minutes = totalSeconds / 60;
@@ -238,17 +228,15 @@ public class ByirpahItem extends Item {
             BlockState targetState = level.getBlockState(targetPos);
             BlockState bottleState = ModBlocks.byirpahBottleFor(stage).defaultBlockState();
             if (targetState.isAir() && bottleState.canSurvive(level, targetPos)) {
-                // Ставим декоративную бутылку
-                level.setBlock(targetPos, bottleState, 3);
-                // Метка бутылки переезжает в блок — ферментация продолжается
-                if (!level.isClientSide() && level.getBlockEntity(targetPos) instanceof ByirpahBottleBlockEntity be) {
-                    be.push(fermentStart(context.getItemInHand(), level));
-                }
-                level.gameEvent(player, net.minecraft.world.level.gameevent.GameEvent.BLOCK_PLACE, targetPos);
-
-                // Уменьшаем стак, если игрок не в креативе
-                if (!player.isCreative()) {
-                    context.getItemInHand().shrink(1);
+                if (!level.isClientSide()) {
+                    level.setBlock(targetPos, bottleState, Block.UPDATE_ALL);
+                    // Метка бутылки переезжает в блок — ферментация продолжается
+                    if (level.getBlockEntity(targetPos) instanceof ByirpahBottleBlockEntity be) {
+                        be.push(fermentStart(context.getItemInHand(), level));
+                    }
+                    level.playSound(null, targetPos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    level.gameEvent(player, GameEvent.BLOCK_PLACE, targetPos);
+                    context.getItemInHand().consume(1, player);
                 }
                 return InteractionResult.SUCCESS;
             }

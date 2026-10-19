@@ -60,11 +60,18 @@ public enum ByirpahStage {
         this.maxLevel = maxLevel;
         this.rows = rows;
     }
+    // Стадия, до которой бутылка этой стадии дозрела к возрасту age (стадии только растут)
     public ByirpahStage targetFor(long age, long stageTicks) {
+        ByirpahStage byAge = age >= 2 * stageTicks ? STRONG : age >= stageTicks ? AGED : FRESH;
+        return byAge.ordinal() > ordinal() ? byAge : this;
+    }
+
+    // Возраст, с которого начинается следующая стадия; у крепкого следующей нет (-1)
+    public long nextStageAge(long stageTicks) {
         return switch (this) {
-            case FRESH -> age >= 2 * stageTicks ? STRONG : age >= stageTicks ? AGED : FRESH;
-            case AGED -> age >= 2 * stageTicks ? STRONG : AGED;
-            case STRONG -> STRONG;
+            case FRESH -> stageTicks;
+            case AGED -> 2 * stageTicks;
+            case STRONG -> -1;
         };
     }
     public int baseLevel() { return baseLevel; }

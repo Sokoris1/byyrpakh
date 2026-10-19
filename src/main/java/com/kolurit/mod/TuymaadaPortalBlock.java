@@ -39,6 +39,8 @@ public class TuymaadaPortalBlock extends Block implements Portal {
     private static final int TRANSITION_TICKS = 40;
     // В каком радиусе искать уже стоящий портал в месте прибытия
     private static final int SEARCH_RADIUS = 8;
+    // В каком радиусе искать ровную сухую землю под новый круг, если прибыли на воду или склон
+    private static final int SITE_RADIUS = 48;
 
     public TuymaadaPortalBlock(Properties properties) {
         super(properties);
@@ -89,10 +91,14 @@ public class TuymaadaPortalBlock extends Block implements Portal {
         int z = pos.getZ();
         BlockPos center = SergeCircle.findPortalCenter(target, x, z, SEARCH_RADIUS);
         if (center == null) {
-            // Круга на той стороне нет — ставим зажжённый круг с открытым порталом
-            center = new BlockPos(x, SergeCircle.surfaceY(target, x, z), z);
-            int poolY = SergeCircle.build(target, center, true, true);
-            center = new BlockPos(x, poolY, z);
+            // Круга на той стороне нет — ставим зажжённый круг с открытым порталом.
+            // По возможности рядом, на ровной сухой земле, а не посреди озера или на склоне
+            BlockPos site = SergeCircle.findSiteNear(target, x, z, SITE_RADIUS);
+            if (site == null) {
+                site = new BlockPos(x, SergeCircle.surfaceY(target, x, z), z);
+            }
+            int poolY = SergeCircle.build(target, site, true, true);
+            center = new BlockPos(site.getX(), poolY, site.getZ());
         }
         // Появляемся на бортике бассейна, внутри круга, а не в самом портале
         int ax = center.getX();

@@ -11,13 +11,6 @@
   "item.edition1.starter": "Starter",
   "item.edition1.milk_starter": "Milk Starter",
   "message.edition1.too_merry": "Вы уже достаточно веселы!",
-  "edition1.configuration.title": "edition1 Configs",
-  "edition1.configuration.section.edition1.common.toml": "edition1 Configs",
-  "edition1.configuration.section.edition1.common.toml.title": "edition1 Configs",
-  "edition1.configuration.items": "Item List",
-  "edition1.configuration.logDirtBlock": "Log Dirt Block",
-  "edition1.configuration.magicNumberIntroduction": "Magic Number Text",
-  "edition1.configuration.magicNumber": "Magic Number",
   "advancement.edition1.root.title": "Byirpakh",
   "advancement.edition1.root.description": "Discover the world of fermentation",
   "advancement.edition1.first_sip.title": "First Sip",
@@ -28,5 +21,10 @@
   "biome.edition1.tuymaada": "Tuymaada Valley",
   "message.edition1.tuymaada_no_sleep": "You can't sleep in Tuymaada: the sun never sets here",
   "block.edition1.serge": "Serge",
-  "block.edition1.tuymaada_portal": "Tuymaada Portal"
+  "block.edition1.tuymaada_portal": "Tuymaada Portal",
+  "edition1.configuration.title": "Byyrpakh Settings",
+  "edition1.configuration.section.edition1.common.toml": "Byyrpakh Settings",
+  "edition1.configuration.section.edition1.common.toml.title": "Byyrpakh Settings",
+  "edition1.configuration.fermentSeconds": "Seconds per fermentation stage",
+  "edition1.configuration.sleepBonusTicks": "Aging bonus for sleeping (ticks)"
 }

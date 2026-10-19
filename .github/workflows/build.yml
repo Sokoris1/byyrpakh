@@ -29,6 +29,16 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+      - name: Probe Minecraft API (temporary)
+        if: always()
+        run: |
+          J=$(find ~/.gradle -name "*.jar" -size +5M 2>/dev/null | while read j; do unzip -l "$j" 2>/dev/null | grep -q "net/minecraft/world/level/block/LeavesBlock.class" && echo "$j" && break; done)
+          echo "JAR=$J"
+          unzip -l "$J" | grep -o "net/minecraft/world/level/block/[A-Za-z]*Leaves[A-Za-z]*.class" | sort -u
+          for c in net.minecraft.world.level.block.LeavesBlock net.minecraft.world.level.block.UntintedParticleLeavesBlock net.minecraft.world.level.block.TintedParticleLeavesBlock net.minecraft.world.level.block.SaplingBlock net.minecraft.world.level.block.grower.TreeGrower net.minecraft.core.particles.ColorParticleOption; do echo "=== $c"; javap -cp "$J" "$c" | grep -E "public|protected" || true; done
+          echo "=== ParticleTypes leaves"; javap -cp "$J" net.minecraft.core.particles.ParticleTypes | grep -i -E "LEAVES" || true
+          echo "=== Blocks leaves props"; javap -cp "$J" net.minecraft.world.level.block.Blocks | grep -i -E "leavesProperties|leaves\(" || true
+
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:

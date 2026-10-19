@@ -1,6 +1,9 @@
 package com.kolurit.mod;
 
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -31,6 +34,16 @@ public class ModBlocks {
             props -> new TuymaadaPortalBlock(props.mapColor(MapColor.GOLD).noCollision().noOcclusion().strength(-1.0F, 3600000.0F)
                     .noLootTable().sound(SoundType.GLASS).pushReaction(PushReaction.BLOCK)
                     .lightLevel(state -> 12)));
+
+    // Сардаана — лилия даурская, национальный цветок Якутии. В рагу даёт огнестойкость
+    public static final DeferredBlock<Block> SARDAANA = BLOCKS.registerBlock("sardaana",
+            props -> new FlowerBlock(MobEffects.FIRE_RESISTANCE, 4.0F, props.mapColor(MapColor.COLOR_RED)
+                    .noCollision().instabreak().sound(SoundType.GRASS)
+                    .offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
+
+    // Сардаана в горшке: конструктор сам связывает цветок с горшком
+    public static final DeferredBlock<Block> POTTED_SARDAANA = BLOCKS.registerBlock("potted_sardaana",
+            props -> new FlowerPotBlock(SARDAANA.get(), props.instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
 
     // Общие свойства блоков-бутылок; поршень разбивает их с дропом
     private static BlockBehaviour.Properties bottleProps(BlockBehaviour.Properties props) {

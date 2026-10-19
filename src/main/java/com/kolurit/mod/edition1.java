@@ -37,12 +37,15 @@ public class edition1 {
         event.enqueueWork(() -> Regions.register(new TuymaadaRegion()));
     }
 
-    // Напитки — ещё и во вкладку «Еда и напитки»
+    // Напитки — ещё и во вкладку «Еда и напитки», сардаана — в «Природные блоки»
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             event.accept(ModItems.BYIRPAH);
             event.accept(ModItems.BYIRPAH_AGED);
             event.accept(ModItems.BYIRPAH_STRONG);
+        }
+        if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
+            event.accept(ModItems.SARDAANA);
         }
     }
 }

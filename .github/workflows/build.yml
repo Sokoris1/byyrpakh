@@ -29,17 +29,6 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      - name: Probe Minecraft API (temporary)
-        if: always()
-        run: |
-          J=$(find ~/.gradle -name "*.jar" -size +5M 2>/dev/null | while read j; do unzip -l "$j" 2>/dev/null | grep -q "net/minecraft/world/level/block/FlowerBlock.class" && echo "$j" && break; done)
-          echo "JAR=$J"
-          for c in net.minecraft.world.level.block.FlowerBlock net.minecraft.world.level.block.FlowerPotBlock; do echo "=== $c"; javap -cp "$J" "$c" | grep -E "public|protected" || true; done
-          echo "=== Properties"; javap -cp "$J" 'net.minecraft.world.level.block.state.BlockBehaviour$Properties' | grep -i -E "offsetType|ofFullCopy|ofLegacyCopy" || true
-          N=$(find ~/.gradle -name "neoforge-*-universal.jar" -o -name "neoforge-26*.jar" 2>/dev/null | head -3); echo "NEO=$N"
-          for n in $N; do javap -cp "$n" 'net.neoforged.neoforge.registries.DeferredRegister$Items' 2>/dev/null | grep -i blockitem || true; done
-          D=$(find ~/.gradle -path "*neoforge*" -name "*.jar" 2>/dev/null | while read j; do unzip -l "$j" 2>/dev/null | grep -q 'DeferredRegister$Items.class' && echo "$j" && break; done); echo "DR=$D"; javap -cp "$D" 'net.neoforged.neoforge.registries.DeferredRegister$Items' | grep -i -E "block" || true
-
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:

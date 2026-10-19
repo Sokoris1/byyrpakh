@@ -26,5 +26,7 @@
   "edition1.configuration.section.edition1.common.toml": "Настройки Быырпаха",
   "edition1.configuration.section.edition1.common.toml.title": "Настройки Быырпаха",
   "edition1.configuration.fermentSeconds": "Секунд на одну стадию ферментации",
-  "edition1.configuration.sleepBonusTicks": "Бонус ферментации за сон (тики)"
+  "edition1.configuration.sleepBonusTicks": "Бонус ферментации за сон (тики)",
+  "block.edition1.sardaana": "Сардаана",
+  "block.edition1.potted_sardaana": "Сардаана в горшке"
 }

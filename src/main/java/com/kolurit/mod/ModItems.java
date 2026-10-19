@@ -1,5 +1,6 @@
 package com.kolurit.mod;
 
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -37,6 +38,9 @@ public class ModItems {
     // Молочная закваска
     public static final DeferredItem<Item> MILK_STARTER = ITEMS.registerItem("milk_starter",
             props -> new Item(props.stacksTo(16)));
+    // Цветок сардаана
+    public static final DeferredItem<BlockItem> SARDAANA = ITEMS.registerSimpleBlockItem(ModBlocks.SARDAANA);
+
     // Общие свойства напитков — в одном месте, чтобы не дублировать
     private static Item.Properties drinkProps(Item.Properties props) {
         return props.stacksTo(16)
@@ -74,6 +78,7 @@ public class ModItems {
                         output.accept(BYIRPAH.get());
                         output.accept(BYIRPAH_AGED.get());
                         output.accept(BYIRPAH_STRONG.get());
+                        output.accept(SARDAANA.get());
                     })
                     .build());
 }

@@ -26,5 +26,7 @@
   "edition1.configuration.section.edition1.common.toml": "Byyrpakh Settings",
   "edition1.configuration.section.edition1.common.toml.title": "Byyrpakh Settings",
   "edition1.configuration.fermentSeconds": "Seconds per fermentation stage",
-  "edition1.configuration.sleepBonusTicks": "Aging bonus for sleeping (ticks)"
+  "edition1.configuration.sleepBonusTicks": "Aging bonus for sleeping (ticks)",
+  "block.edition1.sardaana": "Sardaana",
+  "block.edition1.potted_sardaana": "Potted Sardaana"
 }
